@@ -1,0 +1,118 @@
+//importing nltk 
+import nltk
+//downloading nltk
+nltk.download()
+// importing book from nltk
+from nltk.book import*
+*** Introductory Examples for the NLTK Book ***
+Loading text1, ..., text9 and sent1, ..., sent9
+Type the name of the text or sentence to view it.
+Type: 'texts()' or 'sents()' to list the materials.
+text1: Moby Dick by Herman Melville 1851
+text2: Sense and Sensibility by Jane Austen 1811
+text3: The Book of Genesis
+text4: Inaugural Address Corpus
+text5: Chat Corpus
+text6: Monty Python and the Holy Grail
+text7: Wall Street Journal
+text8: Personals Corpus
+text9: The Man Who Was Thursday by G . K . Chesterton 1908
+
+//brown corpus
+from nltk.corpus import brown
+brown.categories()
+[u'adventure',
+ u'belles_lettres',
+ u'editorial',
+ u'fiction',
+ u'government',
+ u'hobbies',
+ u'humor',
+ u'learned',
+ u'lore',
+ u'mystery',
+ u'news',
+ u'religion',
+ u'reviews',
+ u'romance',
+ u'science_fiction']
+
+brown.words(categories = "humor")
+[u'It', u'was', u'among', u'these', u'that', u'Hinkle', ...]
+
+// inaugural corpus
+from nltk.corpus import inaugural
+inaugural.words()
+[u'Fellow', u'-', u'Citizens', u'of', u'the', ...]
+
+
+//lexicons
+1)	Stopwords
+import nltk
+from nltk.corpus import stopwords
+stopwords.words('english')
+
+import nltk
+from nltk.corpus import stopwords
+stopwords.words('swedish')
+
+2)	Cmudict:
+entries = nltk.corpus.cmudict.entries()
+len(entries)
+
+133737
+
+for entry in entries[10000:10025]:
+    print(entry)
+(u'belford', [u'B', u'EH1', u'L', u'F', u'ER0', u'D'])
+(u'belfry', [u'B', u'EH1', u'L', u'F', u'R', u'IY0'])
+(u'belgacom', [u'B', u'EH1', u'L', u'G', u'AH0', u'K', u'AA0', u'M'])
+(u'belgacom', [u'B', u'EH1', u'L', u'JH', u'AH0', u'K', u'AA0', u'M'])
+(u'belgard', [u'B', u'EH0', u'L', u'G', u'AA1', u'R', u'D'])
+(u'belgarde', [u'B', u'EH0', u'L', u'G', u'AA1', u'R', u'D', u'IY0'])
+(u'belge', [u'B', u'EH1', u'L', u'JH', u'IY0'])
+(u'belger', [u'B', u'EH1', u'L', u'G', u'ER0'])
+(u'belgian', [u'B', u'EH1', u'L', u'JH', u'AH0', u'N'])
+(u'belgians', [u'B', u'EH1', u'L', u'JH', u'AH0', u'N', u'Z'])
+(u'belgique', [u'B', u'EH0', u'L', u'ZH', u'IY1', u'K'])
+(u"belgique's", [u'B', u'EH0', u'L', u'JH', u'IY1', u'K', u'S'])
+(u'belgium', [u'B', u'EH1', u'L', u'JH', u'AH0', u'M'])
+(u"belgium's", [u'B', u'EH1', u'L', u'JH', u'AH0', u'M', u'Z'])
+(u'belgo', [u'B', u'EH1', u'L', u'G', u'OW2'])
+(u'belgrade', [u'B', u'EH1', u'L', u'G', u'R', u'EY0', u'D'])
+(u'belgrade', [u'B', u'EH1', u'L', u'G', u'R', u'AA2', u'D'])
+(u"belgrade's", [u'B', u'EH1', u'L', u'G', u'R', u'EY0', u'D', u'Z'])
+(u"belgrade's", [u'B', u'EH1', u'L', u'G', u'R', u'AA2', u'D', u'Z'])
+(u'belgrave', [u'B', u'EH1', u'L', u'G', u'R', u'EY2', u'V'])
+(u'beli', [u'B', u'EH1', u'L', u'IY0'])
+(u'belich', [u'B', u'EH1', u'L', u'IH0', u'K'])
+(u'belie', [u'B', u'IH0', u'L', u'AY1'])
+(u'belied', [u'B', u'IH0', u'L', u'AY1', u'D'])
+(u'belief', [u'B', u'IH0', u'L', u'IY1', u'F'])
+
+
+3)	Wordnet:
+from nltk.corpus import wordnet as wn
+wn.synsets('motorcar')  #synsets= synonyms sets
+
+[Synset('car.n.01')]
+
+wn.synset('car.n.01').lemma_names()
+[u'car', u'auto', u'automobile', u'machine', u'motorcar']
+
+
+//pipelining 
+texts = ["""VIT offers academic programs in Engineering, Technology, Applied Sciences, and Management. It offers 20 undergraduate programs, 34 postgraduate, four integrated MS courses, and four doctoral programs. VIT consolidated its disciplines into 10 Schools of Study with the addition of the VIT Law School at its Chennai campus.Research centers are part of the schools to encourage collaboration between the research and coursework areas and provide an opportunity for coursework students to participate in research projects. VIT organizes industrial workshops like Automotive Engineering, organized by ParaMek Technologies in GraVitas Fest."""]
+for text in texts:
+    sentences = nltk.sent_tokenize(text)
+    for sentence in sentences:
+        words = nltk.word_tokenize(sentence)
+        tagged_words = nltk.pos_tag(words)
+        print(tagged_words)
+
+[('VIT', 'NNP'), ('offers', 'VBZ'), ('academic', 'JJ'), ('programs', 'NNS'), ('in', 'IN'), ('Engineering', 'NNP'), (',', ','), ('Technology', 'NNP'), (',', ','), ('Applied', 'NNP'), ('Sciences', 'NNPS'), (',', ','), ('and', 'CC'), ('Management', 'NNP'), ('.', '.')]
+[('It', 'PRP'), ('offers', 'VBZ'), ('20', 'CD'), ('undergraduate', 'NN'), ('programs', 'NNS'), (',', ','), ('34', 'CD'), ('postgraduate', 'NN'), (',', ','), ('four', 'CD'), ('integrated', 'VBN'), ('MS', 'NNP'), ('courses', 'NNS'), (',', ','), ('and', 'CC'), ('four', 'CD'), ('doctoral', 'JJ'), ('programs', 'NNS'), ('.', '.')]
+[('VIT', 'NNP'), ('consolidated', 'VBD'), ('its', 'PRP$'), ('disciplines', 'NNS'), ('into', 'IN'), ('10', 'CD'), ('Schools', 'NNP'), ('of', 'IN'), ('Study', 'NNP'), ('with', 'IN'), ('the', 'DT'), ('addition', 'NN'), ('of', 'IN'), ('the', 'DT'), ('VIT', 'NNP'), ('Law', 'NNP'), ('School', 'NNP'), ('at', 'IN'), ('its', 'PRP$'), ('Chennai', 'NNP'), ('campus.Research', 'NN'), ('centers', 'NNS'), ('are', 'VBP'), ('part', 'NN'), ('of', 'IN'), ('the', 'DT'), ('schools', 'NNS'), ('to', 'TO'), ('encourage', 'VB'), ('collaboration', 'NN'), ('between', 'IN'), ('the', 'DT'), ('research', 'NN'), ('and', 'CC'), ('coursework', 'NN'), ('areas', 'NNS'), ('and', 'CC'), ('provide', 'VB'), ('an', 'DT'), ('opportunity', 'NN'), ('for', 'IN'), ('coursework', 'NN'), ('students', 'NNS'), ('to', 'TO'), ('participate', 'VB'), ('in', 'IN'), ('research', 'NN'), ('projects', 'NNS'), ('.', '.')]
+[('VIT', 'NNP'), ('organizes', 'VBZ'), ('industrial', 'JJ'), ('workshops', 'NNS'), ('like', 'IN'), ('Automotive', 'NNP'), ('Engineering', 'NNP'), (',', ','), ('organized', 'VBN'), ('by', 'IN'), ('ParaMek', 'NNP'), ('Technologies', 'NNPS'), ('in', 'IN'), ('GraVitas', 'NNP'), ('Fest', 'NNP'), ('.', '.')]
+
+
